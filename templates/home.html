@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WELCOME TO IGDTUW IT DEPARTMENT CLASSROOM BOOKING SYSTEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Styles for the page layout */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: darkgreen;
+            margin-bottom: 10px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: darkgreen;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .navbar img.logo {
+            position: absolute;
+            left: 10px;
+            height: 50px;
+            width: auto;
+            border-radius: 5px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .slideshow-container {
+            max-width: 800px;
+            position: relative;
+            margin: auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .slideshow-container img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+        .slideshow-container img.active {
+            display: block;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>WELCOME TO IGDTUW IT DEPARTMENT CLASSROOM BOOKING SYSTEM</h1>
+    
+    <div class="navbar">
+        <img src="{{ url_for('static', filename='images/igdtuw.png') }}" alt="IGDTUW Logo" class="logo">
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+    </div>
+
+    <!-- Slideshow Section -->
+    <div class="slideshow-container">
+        <img src="{{ url_for('static', filename='images/img1.jpg') }}" class="active">
+        <img src="{{ url_for('static', filename='images/img2.jpg') }}">
+        <img src="{{ url_for('static', filename='images/img3.jpg') }}">
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".slideshow-container img");
+
+        function showSlides() {
+            slides.forEach((img, i) => {
+                img.classList.remove("active");
+                if (i === slideIndex) img.classList.add("active");
+            });
+            slideIndex = (slideIndex + 1) % slides.length;
+            setTimeout(showSlides, 3000);
+        }
+        showSlides();
+    </script>
+
+    <p>Indira Gandhi Delhi Technical University for Women (IGDTUW) was established by the Govt. NCT of Delhi in May, 2013 vide Delhi Act 09 of 2012, as a non-affiliating University to facilitate and promote studies, research, technology, innovation, incubation and extension work in emerging areas of professional education among women, with focus on engineering, technology, applied sciences, architecture and its allied areas with the objective to achieve excellence in these and related fields.
+        Our website aims to simplify classroom bookings, allowing teachers to easily find and book classrooms at IGDTUW. Register to get started!</p>
+
+    <footer>
+        Created by Deepika and Devika AiMl
+    </footer>
+</body>
+</html>
