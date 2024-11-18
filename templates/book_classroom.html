@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Classroom</title>
+</head>
+<body>
+    <h1>Book Classroom</h1>
+
+    <!-- Display Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashed-messages">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <label for="branch">Branch:</label>
+        <input type="text" name="branch" required>
+
+        <label for="duration">Duration (hours):</label>
+        <input type="number" name="duration" min="1" required>
+
+        <button type="submit">Book Classroom</button>
+    </form>
+
+    <a href="{{ url_for('booking') }}">Back to Booking</a>
+</body>
+</html>
+
