@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .slideshow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .slideshow-container img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow-container img.active {
+            opacity: 1;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-form {
+            width: 350px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .login-form h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .login-form input {
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .login-form button {
+            padding: 10px 20px;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slideshow Section -->
+    <div class="slideshow-container">
+        <img src="{{ url_for('static', filename='images/ss1.jpg') }}" class="active">
+        <img src="{{ url_for('static', filename='images/ss2.jpg') }}">
+        <img src="{{ url_for('static', filename='images/ss3.jpg') }}">
+    </div>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <form class="login-form" action="/login" method="POST">
+            <h1>Login</h1>
+            <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+        <p>Don't have an account? <a href="/register">Register here</a></p>
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".slideshow-container img");
+
+        function showSlides() {
+            slides.forEach((img, i) => {
+                img.classList.remove("active");
+                if (i === slideIndex) img.classList.add("active");
+            });
+            slideIndex = (slideIndex + 1) % slides.length;
+            setTimeout(showSlides, 3000);
+        }
+        showSlides();
+    </script>
+</body>
+</html>
