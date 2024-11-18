@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        form {
+            margin: 0 auto;
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .technician-info {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .technician-info h3 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Submit a Complaint</h1>
+
+    <form action="{{ url_for('complaints') }}" method="POST">
+        <label for="classroom">Classroom</label>
+        <input type="text" id="classroom" name="classroom" placeholder="Enter classroom number" required>
+
+        <label for="issue">Issue Description</label>
+        <textarea id="issue" name="issue" rows="4" placeholder="Describe the issue" required></textarea>
+
+        <label for="contact">Your Contact</label>
+        <input type="text" id="contact" name="contact" placeholder="Your phone number" required>
+
+        <button type="submit">Submit Complaint</button>
+    </form>
+
+    <div class="technician-info">
+        <h2>Technician Contact Information</h2>
+        {% if technicians %}
+            <ul>
+                {% for technician in technicians %}
+                    <li><strong>{{ technician.name }}</strong> - Contact: {{ technician.contact_number }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No technician information available at the moment.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
+
