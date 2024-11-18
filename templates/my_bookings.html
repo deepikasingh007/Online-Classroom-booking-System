@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Your Booked Classrooms</h2>
+    {% if bookings %}
+        <table>
+            <tr>
+                <th>Room Name</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Action</th>
+            </tr>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.room_name }}</td>
+                    <td>{{ booking.start_time }}</td>
+                    <td>{{ booking.end_time }}</td>
+                    <td>
+                        <a href="{{ url_for('cancel_booking', booking_id=booking.booking_id) }}" class="btn btn-danger">Cancel</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>You have no bookings.</p>
+    {% endif %}
+{% endblock %}
