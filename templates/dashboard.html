@@ -21,6 +21,10 @@
             border-radius: 5px;
             margin-bottom: 30px;
         }
+        .navbar img {
+            width: 50px;  /* Logo size for navbar */
+            height: auto;
+        }
         .navbar .icons a {
             color: white;
             text-decoration: none;
@@ -64,18 +68,30 @@
             color: #4CAF50;
             margin-bottom: 20px;
         }
+
+        /* Logo centered on the page */
+        .center-logo {
+            margin-top: 50px;
+        }
+        .center-logo img {
+            width: 200px;  /* Larger size for center logo */
+            height: auto;
+        }
     </style>
 </head>
 <body>
 
     <!-- Navigation Bar -->
     <div class="navbar">
-        <a href="{{ url_for('home') }}"><i class="fas fa-home home-icon"></i></a>
+        <!-- Logo added here for navbar -->
+        <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/igdtuw.png') }}" alt="IGDTUW Logo"></a>
+
         <div class="icons">
             <a href="{{ url_for('booking') }}"><i class="fas fa-calendar-check"></i> Booking</a>
             <a href="{{ url_for('complaints') }}"><i class="fas fa-tools"></i> Complaints</a>
             <a href="{{ url_for('view_bookings') }}"><i class="fas fa-book"></i> View Bookings</a>
         </div>
+
         <div class="profile-dropdown">
             <i class="fas fa-user-circle profile-icon"></i>
             <div class="dropdown-content">
@@ -87,9 +103,15 @@
         </div>
     </div>
 
+    <!-- Centered Logo on the Page -->
+    <div class="center-logo">
+        <img src="{{ url_for('static', filename='images/igdtuw.png') }}" alt="IGDTUW Logo">
+    </div>
+
     <!-- Welcome Message -->
     <h1>Welcome to Your Dashboard</h1>
     <p class="content">Hello, {{ teacher_name }}! Here you can book classrooms, view bookings, and address any technical issues.</p>
 
 </body>
 </html>
+
