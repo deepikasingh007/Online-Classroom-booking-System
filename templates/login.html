@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>Login</title>
     <style>
         body {
             margin: 0;
@@ -37,6 +37,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
         }
 
         .login-form {
@@ -73,6 +74,20 @@
             border-radius: 8px;
             cursor: pointer;
         }
+
+        .login-form p {
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        .login-form a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .login-form a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -87,11 +102,15 @@
     <div class="login-container">
         <form class="login-form" action="/login" method="POST">
             <h1>Login</h1>
-            <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+            <div>
+                <label for="phone_number">Phone Number</label>
+                <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+            </div>
             <button type="submit">Login</button>
         </form>
-    </div>
         <p>Don't have an account? <a href="/register">Register here</a></p>
+    </div>
+
     <script>
         let slideIndex = 0;
         const slides = document.querySelectorAll(".slideshow-container img");
