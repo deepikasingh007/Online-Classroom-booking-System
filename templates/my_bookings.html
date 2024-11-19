@@ -1,36 +1,77 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Bookings</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styling for Table */
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .table thead {
+            background-color: #343a40;
+            color: white;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Your Booked Classrooms</h1>
 
-{% block content %}
-    <h2>Your Booked Classrooms</h2>
-    {% if bookings %}
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Room Name</th>
-                    <th scope="col">Branch</th>
-                    <th scope="col">Start Time</th>
-                    <th scope="col">End Time</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for booking in bookings %}
+        <!-- Table to Display Bookings -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
                     <tr>
-                        <td>{{ booking.classroom_name }}</td>  <!-- Assuming you have a 'classroom_name' field -->
-                        <td>{{ booking.branch }}</td>
-                        <td>{{ booking.start_time.strftime('%Y-%m-%d %H:%M') if booking.start_time else 'N/A' }}</td>  <!-- Handle None values -->
-                        <td>{{ booking.end_time.strftime('%Y-%m-%d %H:%M') if booking.end_time else 'N/A' }}</td>  <!-- Handle None values -->
-                        <td>
-                            <form action="{{ url_for('cancel_booking', booking_id=booking.id) }}" method="POST">
-                                <button type="submit" class="btn btn-danger" aria-label="Cancel Booking for {{ booking.classroom_name }}">Cancel Booking</button>
-                            </form>
-                        </td>
+                        <th scope="col">Room Name</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Start Time</th>
+                        <th scope="col">End Time</th>
+                        <th scope="col">Action</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>You have no bookings.</p>
-    {% endif %}
-{% endblock %}
+                </thead>
+                <tbody>
+                    {% if bookings %}
+                        {% for booking in bookings %}
+                        <tr>
+                            <td>{{ booking.room_name }}</td>  <!-- Room Name from classrooms table -->
+                            <td>{{ booking.branch }}</td>
+                            <td>{{ booking.start_time.strftime('%Y-%m-%d %H:%M') if booking.start_time else 'N/A' }}</td>
+                            <td>{{ booking.end_time.strftime('%Y-%m-%d %H:%M') if booking.end_time else 'N/A' }}</td>
+                            <td>
+                                <form action="{{ url_for('cancel_booking', booking_id=booking.id) }}" method="POST">
+                                    <button type="submit" class="btn btn-danger" aria-label="Cancel Booking for {{ booking.room_name }}">Cancel Booking</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center">You have no bookings.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
 
+        <!-- Back to Dashboard Button -->
+        <div class="text-center mt-4">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary" aria-label="Back to Dashboard">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JavaScript (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
