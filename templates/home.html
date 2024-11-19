@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WELCOME TO IGDTUW IT DEPARTMENT CLASSROOM BOOKING SYSTEM</title>
+    <title>e-cbs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Styles for the page layout */
@@ -11,6 +11,7 @@
             font-family: Arial, sans-serif;
             padding: 20px;
             text-align: center;
+            position: relative; /* To position logo correctly */
         }
         h1 {
             color: darkgreen;
@@ -24,10 +25,11 @@
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 20px;
-            position: relative;
         }
-        .navbar img.logo {
+        /* Logo in top-left corner */
+        .logo {
             position: absolute;
+            top: 10px;
             left: 10px;
             height: 50px;
             width: auto;
@@ -60,10 +62,12 @@
     </style>
 </head>
 <body>
+    <!-- Logo above the navbar in the top-left corner -->
+    <img src="{{ url_for('static', filename='images/igdtuw.png') }}" alt="IGDTUW Logo" class="logo">
+    
     <h1>WELCOME TO IGDTUW IT DEPARTMENT CLASSROOM BOOKING SYSTEM</h1>
     
     <div class="navbar">
-        <img src="{{ url_for('static', filename='images/igdtuw.png') }}" alt="IGDTUW Logo" class="logo">
         <a href="{{ url_for('login') }}">Login</a>
         <a href="{{ url_for('register') }}">Register</a>
     </div>
