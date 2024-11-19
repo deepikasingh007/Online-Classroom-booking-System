@@ -3,23 +3,31 @@
 {% block content %}
     <h2>Your Booked Classrooms</h2>
     {% if bookings %}
-        <table>
-            <tr>
-                <th>Room Name</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Action</th>
-            </tr>
-            {% for booking in bookings %}
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>{{ booking.room_name }}</td>
-                    <td>{{ booking.start_time }}</td>
-                    <td>{{ booking.end_time }}</td>
-                    <td>
-                        <a href="{{ url_for('cancel_booking', booking_id=booking.booking_id) }}" class="btn btn-danger">Cancel</a>
-                    </td>
+                    <th scope="col">Room Name</th>
+                    <th scope="col">Branch</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Action</th>
                 </tr>
-            {% endfor %}
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.classroom_name }}</td>  <!-- Assuming you have a 'classroom_name' field -->
+                        <td>{{ booking.branch }}</td>
+                        <td>{{ booking.start_time.strftime('%Y-%m-%d %H:%M') if booking.start_time else 'N/A' }}</td>  <!-- Handle None values -->
+                        <td>{{ booking.end_time.strftime('%Y-%m-%d %H:%M') if booking.end_time else 'N/A' }}</td>  <!-- Handle None values -->
+                        <td>
+                            <form action="{{ url_for('cancel_booking', booking_id=booking.id) }}" method="POST">
+                                <button type="submit" class="btn btn-danger" aria-label="Cancel Booking for {{ booking.classroom_name }}">Cancel Booking</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
         </table>
     {% else %}
         <p>You have no bookings.</p>
