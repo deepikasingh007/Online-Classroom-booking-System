@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .profile-container { max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
-        h2 { color: darkgreen  }
-        p { font-size: 1.1em; color: #333; }  
-    </style>
+    <title>Teacher Profile</title>
 </head>
 <body>
-    <div class="profile-container">
-        <h2>Teacher Profile</h2>
-        <p><strong>Name:</strong> {{ teachers.name }}</p>
-       
-        <p><strong>Phone Number:</strong> {{ teachers.phone_number }}</p>
-        <p><strong>Subject:</strong> {{ teachers.subject }}</p>
-        <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
-    </div>
+    <h1>Welcome to Your Profile, {{ teacher['teacher_name'] }}!</h1>
+    <p><strong>Name:</strong> {{ teacher['teacher_name'] }}</p>
+    <p><strong>Phone Number:</strong> {{ teacher['phone_number'] }}</p>
+    <p><strong>Subject:</strong> {{ teacher['subject'] }}</p>
+
+    <!-- Optionally add an update profile form -->
+    <h2>Update Your Profile</h2>
+    <form action="{{ url_for('update_profile') }}" method="POST">
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" name="phone_number" value="{{ teacher['phone_number'] }}" required><br>
+
+        <label for="subject">Subject:</label>
+        <input type="text" name="subject" value="{{ teacher['subject'] }}" required><br>
+
+        <input type="submit" value="Update Profile">
+    </form>
+
+    <br>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
 </body>
 </html>
