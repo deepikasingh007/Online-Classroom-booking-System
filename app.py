@@ -132,7 +132,7 @@ def view_bookings():
         SELECT
             bookings.id AS booking_id,
             bookings.classroom_id,
-            teachers.teacher_name AS teacher_name,
+            teachers.name AS teacher_name,
             classrooms.room_name,
             bookings.branch,
             bookings.start_time,
@@ -288,7 +288,7 @@ def register():
         phone_number = request.form['phone_number']
         subject = request.form['subject']
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO teachers (teacher_name, phone_number, subject) VALUES (%s, %s, %s)", 
+        cur.execute("INSERT INTO teachers (name, phone_number, subject) VALUES (%s, %s, %s)", 
                     (name, phone_number, subject))
         mysql.connection.commit()
         cur.close()
