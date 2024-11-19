@@ -6,8 +6,35 @@
     <title>View Bookings</title>
     <!-- Include Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .logo {
+            position: absolute;
+            top: 23px; /* Moves the logo slightly down */
+            left: 10px; /* Keeps spacing from the left */
+            max-width: 150px; /* Adjust size if needed */
+            max-height: 150px; /* Prevents overflow */
+            object-fit: contain; /* Maintains aspect ratio */
+        }
+    
+        body {
+            margin: 0; /* Removes default body margin */
+            padding: 0; /* Removes extra padding */
+        }
+    </style>
+    
+    
+    
 </head>
 <body>
+
+    <!-- Logo in the top-left corner -->
+    <img src="{{ url_for('static', filename='images/igdtuw.png') }}" alt="IGDTUW Logo" class="logo">
+
+    <!-- Navbar with logo -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#"></a>
+    </nav>
+
     <div class="container mt-5">
         <h1 class="text-center mb-4">All Bookings</h1>
 
@@ -32,25 +59,23 @@
                         <td>{{ booking.teacher_name }}</td>
                         <td>{{ booking.room_name }}</td>
                         <td>{{ booking.branch }}</td>
-                        <td>{{ booking.start_time.strftime('%Y-%m-%d %H:%M') if booking.start_time else 'N/A' }}</td>  <!-- Format time -->
-                        <td>{{ booking.end_time.strftime('%Y-%m-%d %H:%M') if booking.end_time else 'N/A' }}</td>  <!-- Format time -->
+                        <td>{{ booking.start_time.strftime('%Y-%m-%d %H:%M') if booking.start_time else 'N/A' }}</td>
+                        <td>{{ booking.end_time.strftime('%Y-%m-%d %H:%M') if booking.end_time else 'N/A' }}</td>
                     </tr>
                     {% endfor %}
                 {% else %}
                     <tr>
-                        <td colspan="7" class="text-center">No bookings available.</td>  <!-- Adjusted colspan to 7 -->
+                        <td colspan="7" class="text-center">No bookings available.</td>
                     </tr>
                 {% endif %}
             </tbody>
         </table>
 
-        <!-- Back to Dashboard Button -->
         <div class="text-center mt-4">
             <a href="{{ url_for('dashboard') }}" class="btn btn-primary" aria-label="Back to Dashboard">Back to Dashboard</a>
         </div>
     </div>
 
-    <!-- Include Bootstrap JavaScript (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
