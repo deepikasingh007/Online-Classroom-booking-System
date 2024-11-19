@@ -5,10 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complaints</title>
     <style>
+        /* Styles for the page layout */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
+            position: relative; /* To position logo correctly */
+        }
+        h1 {
+            color: darkgreen;
+            margin-bottom: 10px;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            height: 50px;
+            width: auto;
+            border-radius: 5px;
         }
         form {
             margin: 0 auto;
@@ -46,6 +60,9 @@
 </head>
 <body>
 
+    <!-- Logo in the top-left corner -->
+    <img src="{{ url_for('static', filename='images/igdtuw.png') }}" alt="IGDTUW Logo" class="logo">
+
     <h1>Submit a Complaint</h1>
 
     <form action="{{ url_for('complaints') }}" method="POST">
@@ -76,4 +93,3 @@
 
 </body>
 </html>
-
