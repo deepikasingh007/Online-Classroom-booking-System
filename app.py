@@ -9,7 +9,7 @@ app.secret_key = 'this_is_a_secret_key'
 # Initialize MySQL
 app.config['MYSQL_HOST'] = 'localhost' 
 app.config['MYSQL_USER'] = 'root'       
-app.config['MYSQL_PASSWORD'] = '543212345'  
+app.config['MYSQL_PASSWORD'] = '12345678'  
 app.config['MYSQL_DB'] = 'classroom_booking'  
 
 mysql = MySQL(app)
@@ -156,10 +156,17 @@ def my_bookings():
     
     teacher_id = session.get('teacher_id')  
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cur.execute("SELECT * FROM bookings WHERE teacher_id = %s", (teacher_id,))
+    # Using JOIN to retrieve room_name from classrooms
+    cur.execute("""
+        SELECT bookings.*, classrooms.room_name 
+        FROM bookings 
+        JOIN classrooms ON bookings.classroom_id = classrooms.id
+        WHERE bookings.teacher_id = %s
+    """, (teacher_id,))
     bookings = cur.fetchall()
     cur.close()
     return render_template('my_bookings.html', bookings=bookings)
+
 
 @app.route('/cancel_booking/<int:booking_id>', methods=['POST'])
 def cancel_booking(booking_id):
@@ -235,7 +242,7 @@ def profile():
         return redirect(url_for('login'))
 
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cur.execute("SELECT teacher_name, phone_number, subject FROM teachers WHERE id = %s", (teacher_id,))
+    cur.execute("SELECT name, phone_number, subject FROM teachers WHERE id = %s", (teacher_id,))
     teacher = cur.fetchone()
     cur.close()
 
