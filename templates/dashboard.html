@@ -79,8 +79,8 @@
         <div class="profile-dropdown">
             <i class="fas fa-user-circle profile-icon"></i>
             <div class="dropdown-content">
-                
-                <a href="{{ url_for('profile', phone_number=phone_number) }}">Profile</a>
+                <!-- Update the profile link to use teacher_id instead of phone_number -->
+                <a href="{{ url_for('profile', teacher_id=teacher_id) }}">Profile</a>
                 <a href="{{ url_for('my_bookings') }}">View My Bookings</a>
                 <a href="{{ url_for('logout') }}">Logout</a>
             </div>
