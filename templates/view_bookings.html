@@ -29,15 +29,16 @@
                     <tr>
                         <td>{{ booking.booking_id }}</td>
                         <td>{{ booking.classroom_id }}</td>
+                        <td>{{ booking.teacher_name }}</td>
                         <td>{{ booking.room_name }}</td>
                         <td>{{ booking.branch }}</td>
-                        <td>{{ booking.start_time }}</td>
-                        <td>{{ booking.end_time }}</td>
+                        <td>{{ booking.start_time.strftime('%Y-%m-%d %H:%M') if booking.start_time else 'N/A' }}</td>  <!-- Format time -->
+                        <td>{{ booking.end_time.strftime('%Y-%m-%d %H:%M') if booking.end_time else 'N/A' }}</td>  <!-- Format time -->
                     </tr>
                     {% endfor %}
                 {% else %}
                     <tr>
-                        <td colspan="6" class="text-center">No bookings available.</td>
+                        <td colspan="7" class="text-center">No bookings available.</td>  <!-- Adjusted colspan to 7 -->
                     </tr>
                 {% endif %}
             </tbody>
@@ -45,7 +46,7 @@
 
         <!-- Back to Dashboard Button -->
         <div class="text-center mt-4">
-            <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary" aria-label="Back to Dashboard">Back to Dashboard</a>
         </div>
     </div>
 
