@@ -65,4 +65,4 @@ Contributions are welcome! If you find a bug or would like to add a feature, fee
 **Push to the branch (git push origin feature-name).**
 **Submit a pull request.**
 ## Contact
-For any inquiries, please contact us at [devikajaincambridge@gmail.com] or through our issue tracker on GitLab.
+For any inquiries, please contact us at [devikajaincambridge@gmail.com] [deeps25104@gmail.com] or through our issue tracker on GitLab.
